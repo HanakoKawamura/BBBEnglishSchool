@@ -16,8 +16,8 @@ const webp = require('gulp-webp');//webpに変換
 
 // 入出力するフォルダを指定
 const baseRoot = './public_html';
-const srcBase = './src';
-const distBase = './public_html/assets';
+const srcBase = './src';//ソースコードが入っているファイル
+const distBase = './public_html/assets';//配布先,例：Sassをコンパイルした内容をどこに配布するか指定
 
 const srcPath = {
   'scss': srcBase + '/scss/**/*.scss',
@@ -83,7 +83,7 @@ const js = () => {
  */
 const imageWebp = () => {
   return gulp
-  .src(srcBase+'/img/**/*.+(jpg|jpeg|png)')
+  .src(srcBase+'/img/**/*.+(jpg|jpeg|png|svg)')
   .pipe(webp())
   .pipe(gulp.dest(distPath.img));
 }
@@ -95,6 +95,7 @@ const browserSyncFunc = () => {
   browserSync.init(browserSyncOption);
 }
 
+//コメントアウト部分はWordpressについての設定
 const browserSyncOption = {
   // proxy: "example.wp",// ローカルにある「Site Domain」に合わせる
   // notify: false,// ブラウザ更新時に出てくる通知を非表示にする
@@ -103,7 +104,7 @@ const browserSyncOption = {
     baseDir : './public_html',
     index : ['index.html'],
   },
-  ghostMode: {// 同期設定
+  ghostMode: {// 同期設定,スマホなどでPCと同じ環境で開いた場合、同じ挙動をする,trueにすると面白い
     clicks: false,
     forms: false,
     scroll: false,
